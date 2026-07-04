@@ -23,7 +23,7 @@
 | **Team Leader** | GACHUMALE SAI CHARAN REDDY |
 | **Member**      | ARITRA DAS |
 | **Member**      | PATHLAVATH NITHIN |
-| **Member**      | KAMUTAM VIKAS  |
+| **Member**      | KAMUTAM VIKAS |
 
 ---
 
