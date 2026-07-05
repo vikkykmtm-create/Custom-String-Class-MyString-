@@ -19,7 +19,7 @@
 
 | Role            | Name              |
 | --------------- | ----------------- |
-| **Team Menter** | KANDULA SAHITHYA  |
+| **Team Mentor** | KANDULA SAHITHYA  |
 | **Team Leader** | GACHUMALE SAI CHARAN REDDY |
 | **Member**      | ARITRA DAS |
 | **Member**      | PATHLAVATH NITHIN |
