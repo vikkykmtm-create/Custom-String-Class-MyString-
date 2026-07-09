@@ -51,16 +51,12 @@ const string DIM     = "\033[2m";
 // Utility: print a horizontal divider line
 // ==========================================
 void printDivider() {
-    cout << GRAY << "  " << string(54, '-') << RESET << "\n";
-}
-
+    cout << GRAY << "  " << string(54, '-') << RESET << "\n";}
 // ==========================================
 // Utility: print a section header
 // ==========================================
 void printHeader(const string& title) {
-    cout << "\n" << CYAN << BOLD << "  == " << title << " ==" << RESET << "\n\n";
-}
-
+    cout << "\n" << CYAN << BOLD << "  == " << title << " ==" << RESET << "\n\n";}
 // ==========================================
 // MyString — custom string class
 // ==========================================
@@ -68,7 +64,6 @@ class MyString {
 private:
     char* data;   // heap-allocated, null-terminated buffer
     size_t len;   // length, NOT counting the null terminator
-
     // ----------------------------------------------------------
     // allocateAndCopy() — allocates len+1 bytes and copies src
     // in (or leaves it empty if src == nullptr). O(n) time.
@@ -77,28 +72,21 @@ private:
         len = length;
         data = new char[len + 1];
         if (src) memcpy(data, src, len);
-        data[len] = '\0';
-    }
-
+        data[len] = '\0';}
 public:
     static const size_t npos = (size_t)-1;
-
     // ----------------------------------------------------------
     // Constructors
     // ----------------------------------------------------------
     MyString() : data(nullptr), len(0) { allocateAndCopy(nullptr, 0); }
 
     MyString(const char* str) : data(nullptr), len(0) {
-        allocateAndCopy(str, str ? strlen(str) : 0);
-    }
-
+        allocateAndCopy(str, str ? strlen(str) : 0);}
     MyString(size_t count, char ch) : data(nullptr), len(0) {
         len = count;
         data = new char[len + 1];
         memset(data, ch, len);
-        data[len] = '\0';
-    }
-
+        data[len] = '\0';}
     // ----------------------------------------------------------
     // Rule of Five — required because this class owns a raw
     // pointer. Without these, the compiler-generated versions
@@ -106,14 +94,12 @@ public:
     // frees and shared-buffer bugs.
     // ----------------------------------------------------------
     MyString(const MyString& other) : data(nullptr), len(0) {
-        allocateAndCopy(other.data, other.len);   // deep copy
-    }
-
+        allocateAndCopy(other.data, other.len); }  // deep copy
+    
     MyString(MyString&& other) noexcept : data(other.data), len(other.len) {
         other.data = nullptr;                      // steal, don't copy
-        other.len = 0;
-    }
-
+        other.len = 0;}
+    
     MyString& operator=(const MyString& other) {
         if (this == &other) return *this;           // self-assign guard
         char* newData = new char[other.len + 1];     // allocate first
@@ -122,8 +108,7 @@ public:
         delete[] data;                                // free only after success
         data = newData;
         len = other.len;
-        return *this;
-    }
+        return *this;}
 
     MyString& operator=(MyString&& other) noexcept {
         if (this == &other) return *this;
@@ -132,11 +117,9 @@ public:
         len = other.len;
         other.data = nullptr;
         other.len = 0;
-        return *this;
-    }
-
+        return *this;}
+    
     ~MyString() { delete[] data; }
-
     // ----------------------------------------------------------
     // Accessors
     // ----------------------------------------------------------
@@ -144,7 +127,6 @@ public:
     size_t size() const { return len; }
     bool empty() const { return len == 0; }
     const char* c_str() const { return data; }
-
     // ----------------------------------------------------------
     // Element access — [] is fast/unchecked, at() is safe
     // ----------------------------------------------------------
@@ -157,9 +139,8 @@ public:
     }
     const char& at(size_t index) const {
         if (index >= len) throw out_of_range("MyString::at index out of range");
-        return data[index];
-    }
-
+        return data[index];}
+    
     // ----------------------------------------------------------
     // Concatenation
     // ----------------------------------------------------------
@@ -171,9 +152,8 @@ public:
         memcpy(result.data, data, len);
         memcpy(result.data + len, rhs.data, rhs.len);
         result.data[result.len] = '\0';
-        return result;
-    }
-
+        return result;}
+    
     MyString& operator+=(const MyString& rhs) {
         char* newData = new char[len + rhs.len + 1];
         memcpy(newData, data, len);
@@ -182,9 +162,8 @@ public:
         newData[len] = '\0';
         delete[] data;
         data = newData;
-        return *this;
-    }
-
+        return *this;}
+    
     // ----------------------------------------------------------
     // Comparison
     // ----------------------------------------------------------
@@ -194,7 +173,6 @@ public:
     bool operator!=(const MyString& rhs) const { return !(*this == rhs); }
     bool operator<(const MyString& rhs) const { return strcmp(data, rhs.data) < 0; }
     bool operator>(const MyString& rhs) const { return strcmp(data, rhs.data) > 0; }
-
     // ----------------------------------------------------------
     // Substring / search
     // ----------------------------------------------------------
@@ -207,38 +185,32 @@ public:
         result.data = new char[actualCount + 1];
         memcpy(result.data, data + start, actualCount);
         result.data[actualCount] = '\0';
-        return result;
-    }
-
+        return result;}
+    
     size_t find(const MyString& needle, size_t startPos = 0) const {
         if (needle.len == 0) return startPos <= len ? startPos : npos;
         if (startPos >= len) return npos;
         const char* found = strstr(data + startPos, needle.data);
-        return found ? (size_t)(found - data) : npos;
-    }
-
+        return found ? (size_t)(found - data) : npos;}
+    
     size_t find(char ch, size_t startPos = 0) const {
         for (size_t i = startPos; i < len; ++i)
             if (data[i] == ch) return i;
-        return npos;
-    }
-
+        return npos;}
+    
     // ----------------------------------------------------------
     // Stream I/O
     // ----------------------------------------------------------
     friend ostream& operator<<(ostream& os, const MyString& s) {
         os << (s.data ? s.data : "");
-        return os;
-    }
-
+        return os;}
+    
     friend istream& operator>>(istream& is, MyString& s) {
         char buffer[1024];
         is >> buffer;
         s = MyString(buffer);
-        return is;
-    }
+        return is;}
 };
-
 // ==========================================
 // Display the main menu UI
 // ==========================================
@@ -274,8 +246,7 @@ void displayMenu(const MyString& a, const MyString& b) {
     cout << GRAY   << "  --------------------------------------------------\n" << RESET;
     cout << GRAY   << "  * Slot A and Slot B each hold one MyString\n\n" << RESET;
     cout << GREEN  << "  -> " << GRAY << "Enter your choice and press Enter...\n" << RESET;
-    cout << GREEN  << "\n  > " << RESET;
-}
+    cout << GREEN  << "\n  > " << RESET;}
 
 // ==========================================
 // main()
@@ -330,33 +301,29 @@ int main() {
                 } else {
                     cout << RED << "  Unknown slot '" << slot << "'.\n" << RESET;
                 }
-                break;
-            }
-
+                break;}
+            
             case 2: {
                 printHeader("DISPLAY STRINGS");
                 cout << "  A = \"" << strA << "\"\n";
                 cout << "  B = \"" << strB << "\"\n";
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 3: {
                 printHeader("STRING LENGTHS");
                 cout << CYAN << "  Length of A : " << BOLD << strA.length() << RESET << "\n";
                 cout << CYAN << "  Length of B : " << BOLD << strB.length() << RESET << "\n";
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 4: {
                 printHeader("CONCATENATION (A + B)");
                 MyString result = strA + strB;   // new object; A and B untouched
                 cout << GREEN << "  A + B = " << BOLD << result << RESET << "\n";
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 5: {
                 printHeader("COMPARE A AND B");
                 if (strA == strB) {
@@ -367,9 +334,8 @@ int main() {
                     cout << YELLOW << "  A comes AFTER B (lexicographically).\n" << RESET;
                 }
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 6: {
                 printHeader("ACCESS CHARACTER BY INDEX");
                 char slot;
@@ -388,9 +354,8 @@ int main() {
                     cout << RED << "  Error: " << ex.what() << "\n" << RESET;
                 }
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 7: {
                 printHeader("GET SUBSTRING");
                 char slot;
@@ -411,9 +376,8 @@ int main() {
                     cout << RED << "  Error: " << ex.what() << "\n" << RESET;
                 }
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 8: {
                 printHeader("FIND SUBSTRING / CHARACTER");
                 char slot;
@@ -434,9 +398,8 @@ int main() {
                     cout << GREEN << "  Found at index " << BOLD << pos << RESET << "\n";
                 }
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 9: {
                 printHeader("COPY A INTO B (DEEP COPY)");
                 strB = strA;   // copy assignment operator — deep copy
@@ -444,9 +407,8 @@ int main() {
                      << RESET << "\n";
                 cout << DIM   << "  (A and B now hold separate buffers with equal content)\n" << RESET;
                 printDivider();
-                break;
-            }
-
+                break;}
+            
             case 0: {
                 cout << "\n" << YELLOW << BOLD;
                 cout << "  ====================================================\n";
@@ -455,13 +417,11 @@ int main() {
                 cout << "  ====================================================\n";
                 cout << RESET << "\n";
                 running = false;
-                break;
-            }
-
+                break;}
+            
             default:
                 cout << RED << "\n  Invalid choice. Please select 0-9.\n" << RESET;
         }
     }
-
     return 0;
 }
