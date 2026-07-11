@@ -7,7 +7,7 @@
 ```
 ███╗   ███╗██╗   ██╗
 ████╗ ████║╚██╗ ██╔╝   MyString  
-██╔████╔██║ ╚████╔╝    [Your College Name
+██╔████╔██║ ╚████╔╝    Vardhaman College of Engineering 
 ██║╚██╔╝██║  ╚██╔╝     CSE Department · Summer Project 2025–26
 ██║ ╚═╝ ██║   ██║
 ╚═╝     ╚═╝   ╚═╝
@@ -19,11 +19,11 @@
 
 | Role            | Name              |
 | --------------- | ----------------- |
-| **Team Mentor** | [Mentor Name]      |
-| **Team Leader** | [Your Name]        |
-| **Member**      | [Member Name]      |
-| **Member**      | [Member Name]      |
-| **Member**      | [Member Name]      |
+| **Team Mentor** | K.SAHITHYA      |
+| **Team Leader** | G.SAI CHARAN REDDY |
+| **Member**      | ARITRA DAS  |
+| **Member**      | P.NITHIN  |
+| **Member**      | K.VIKAS  |
 
 ---
 
@@ -208,5 +208,5 @@ After studying this project you will understand:
 
 ## License
 
-Academic project — [Your College Name], CSE Department, 2025–26.
+Academic project — Vardhaman College of Engineering, CSE Department, 2025–26.
 Not intended for commercial use.
