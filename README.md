@@ -2,7 +2,7 @@
 
 # MyString — Custom String Class in C++
 
-> **Custom Deep-Copy String Class · C++17 · Terminal Application**
+> **Custom Deep-Copy String Class · C++ · Terminal Application**
 
 ```
 ███╗   ███╗██╗   ██╗
@@ -87,7 +87,7 @@ MyString/
 
 | Tool | Minimum Version |
 |------|----------------|
-| C++ Compiler (g++) | C++17 or later |
+| C++ Compiler (g++) | C++ or later |
 | Terminal | ANSI-color-capable terminal (menu uses colored text) |
 | OS | Linux · macOS · Windows |
 
