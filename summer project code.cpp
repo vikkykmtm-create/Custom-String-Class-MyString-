@@ -1,5 +1,5 @@
 // MyString — custom deep-copy string class (compact edition)
-// Compile: g++ -std=c++17 -o mystring MyString.cpp
+// Compile: g++ -std=c++ -o mystring MyString.cpp
 #include <iostream>
 #include <cstring>
 #include <stdexcept>
